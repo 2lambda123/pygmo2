@@ -13,30 +13,42 @@ import secrets
 class _prob(object):
 
     def get_bounds(self):
+        """"""
+        
         return ([0, 0], [1, 1])
 
     def fitness(self, a):
+        """"""
+        
         return [42]
 
 
 class _quick_prob:
 
     def fitness(self, dv):
+        """"""
+        
         return [sum(dv)]
 
     def get_bounds(self):
+        """"""
+        
         return ([0] * 10, [1] * 10)
 
 
 class _r_pol(object):
 
     def replace(self, inds, nx, nix, nobj, nec, nic, tol, mig):
+        """"""
+        
         return inds
 
 
 class _s_pol(object):
 
     def select(self, inds, nx, nix, nobj, nec, nic, tol):
+        """"""
+        
         return inds
 
 
@@ -46,6 +58,8 @@ class core_test_case(_ut.TestCase):
     """
 
     def runTest(self):
+        """"""
+        
         from numpy import random, all, array
         from .core import _builtins, _type, _str, _callable, _deepcopy
         from . import __version__
@@ -64,6 +78,8 @@ class core_test_case(_ut.TestCase):
         self.run_s11n_test()
 
     def run_s11n_test(self):
+        """"""
+        
         # Tests for the selection of the serialization backend.
         import cloudpickle as clpickle
         import pickle
@@ -129,6 +145,8 @@ class population_test_case(_ut.TestCase):
     """
 
     def runTest(self):
+        """"""
+        
         self.run_init_test()
         self.run_best_worst_idx_test()
         self.run_champion_test()
@@ -140,6 +158,8 @@ class population_test_case(_ut.TestCase):
         self.run_pickle_test()
 
     def run_init_test(self):
+        """"""
+        
         from .core import population, null_problem, rosenbrock, problem, bfe, default_bfe, thread_bfe
         pop = population()
         self.assertTrue(len(pop) == 0)
@@ -200,6 +220,8 @@ class population_test_case(_ut.TestCase):
             self.assertEqual(f, 43)
 
     def run_best_worst_idx_test(self):
+        """"""
+        
         from .core import population, rosenbrock, zdt
         pop = population(rosenbrock(), size=10)
         self.assertTrue(pop.best_idx() < 10)
@@ -215,6 +237,8 @@ class population_test_case(_ut.TestCase):
         self.assertRaises(ValueError, lambda: pop.worst_idx())
 
     def run_champion_test(self):
+        """"""
+        
         from .core import population, null_problem, problem, zdt
         from numpy import array
         udp = null_problem()
@@ -230,6 +254,8 @@ class population_test_case(_ut.TestCase):
         self.assertRaises(ValueError, lambda: pop.champion_f)
 
     def run_getters_test(self):
+        """"""
+        
         from .core import population
         from numpy import ndarray
         pop = population(size=100, seed=123)
@@ -244,6 +270,8 @@ class population_test_case(_ut.TestCase):
         self.assertEqual(pop.get_seed(), 123)
 
     def run_problem_test(self):
+        """"""
+        
         from .core import population, rosenbrock, null_problem, problem, zdt
         import sys
         pop = population(size=10)
@@ -263,6 +291,8 @@ class population_test_case(_ut.TestCase):
         self.assertRaises(AttributeError, prob_setter)
 
     def run_push_back_test(self):
+        """"""
+        
         from .core import population, rosenbrock
         from numpy import array
         pop = population(rosenbrock(), size=5)
@@ -290,6 +320,8 @@ class population_test_case(_ut.TestCase):
         self.assertRaises(ValueError, lambda: pop.push_back([1] * 5, [1, 2]))
 
     def run_random_dv_test(self):
+        """"""
+        
         from .core import population, rosenbrock
         from numpy import ndarray
         pop = population(rosenbrock())
@@ -301,6 +333,8 @@ class population_test_case(_ut.TestCase):
         self.assertTrue(pop.random_decision_vector()[1] <= 10)
 
     def run_set_x_xf_test(self):
+        """"""
+        
         from .core import population, rosenbrock
         from numpy import array
         pop = population(rosenbrock())
@@ -328,6 +362,8 @@ class population_test_case(_ut.TestCase):
         self.assertEqual(pop.best_idx(), 6)
 
     def run_pickle_test(self):
+        """"""
+        
         from .core import population, rosenbrock, translate
         from pickle import dumps, loads
         pop = population(rosenbrock(), size=12, seed=42)
@@ -350,6 +386,8 @@ class mbh_test_case(_ut.TestCase):
     """
 
     def runTest(self):
+        """"""
+        
         from . import mbh, de, compass_search, algorithm, thread_safety as ts, null_algorithm
         from numpy import array
 
@@ -444,6 +482,8 @@ class fair_replace_test_case(_ut.TestCase):
     """
 
     def runTest(self):
+        """"""
+        
         from .core import fair_replace, r_policy
         udrp = fair_replace()
         r_pol = r_policy(udrp=udrp)
