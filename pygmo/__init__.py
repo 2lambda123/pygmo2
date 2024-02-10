@@ -33,6 +33,7 @@ import cloudpickle as _cloudpickle
 # Explicitly import the test submodule
 from . import test
 import atexit as _atexit
+import secrets
 
 
 # We move into the problems, algorithms, etc. namespaces
@@ -557,11 +558,9 @@ def _archi_init(self, n=0, t=topology(), **kwargs):
     __original_archi_init(self, t)
 
     if 'seed' in kwargs:
-        # Special handling of the 'seed' argument.
-        from random import Random
         from .core import _max_unsigned
         # Create a random engine with own state.
-        RND = Random()
+        RND = secrets.SystemRandom().Random()
         # Get the seed from kwargs.
         seed = kwargs.pop('seed')
         if not isinstance(seed, int):

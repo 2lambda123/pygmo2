@@ -7,6 +7,7 @@
 # with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import unittest as _ut
+import secrets
 
 
 class _prob(object):
@@ -3064,11 +3065,7 @@ def run_test_suite(level=0):
         pass
 
     test_result = _ut.TextTestRunner(verbosity=2).run(suite)
-
-    # Re-seed to random just in case anyone ever uses this function
-    # in an interactive session or something.
-    import random
-    set_global_rng_seed(random.randint(0, 2**30))
+    set_global_rng_seed(secrets.SystemRandom().randint(0, 2**30))
 
     if len(test_result.failures) > 0 or len(test_result.errors) > 0:
         retval = 1
